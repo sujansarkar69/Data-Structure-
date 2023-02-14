@@ -124,7 +124,7 @@ public:
         return (1 + NodeSize(a->left) + NodeSize(a->right));
     }
 
-    bool isPerfect(node *a, int Nodelevel, int index = 0)
+    bool isPerfect(node *a, int Nodelevel, int index)
     {
         if (a == NULL)
             return (true);
@@ -153,7 +153,7 @@ int main()
     cout << "Node Level: " << nodelevel << "\n";
     cout << "Node Size: " << nodesize << "\n";
 
-    if (bt.isPerfect(bt.root, nodelevel))
+    if (bt.isPerfect(bt.root, nodelevel, 0))
     {
         cout << "Perfect\n";
     }
