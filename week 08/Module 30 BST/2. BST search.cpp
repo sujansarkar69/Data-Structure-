@@ -1,4 +1,5 @@
 // BST stand for Binary Search Tree
+//Complexity of Searching in average case: O(logn) and worst case: O(n)
 #include <bits/stdc++.h>
 using namespace std;
 class node
