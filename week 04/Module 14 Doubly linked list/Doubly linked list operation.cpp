@@ -148,14 +148,15 @@ public:
 int main()
 {
     DoublyLinkedList dl;
-    dl.InsertAtHead(10);
-    dl.InsertAtHead(5);
-    dl.InsertAtHead(1);
-    dl.Traverse();
-    dl.InsertAtIndex(2, 100);
-    dl.Traverse();
-    dl.Reverse();
-    dl.Traverse();
+    // dl.InsertAtHead(10);
+    // dl.InsertAtHead(5);
+    // dl.InsertAtHead(1);
+    // dl.Traverse();
+    // dl.InsertAtIndex(2, 100);
+    // dl.Traverse();
+    // dl.Reverse();
+    // dl.Traverse();
+    cout<<sizeof(node);
     
    
 }
