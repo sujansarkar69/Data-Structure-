@@ -39,18 +39,30 @@ public:
             arr[i] = CreateNewNode(i);
         }
 
-        arr[0]->left = arr[1];
-        arr[0]->right = arr[2];
+        // arr[0]->left = arr[1];
+        // arr[0]->right = arr[2];
 
-        arr[1]->left = arr[5];
-        arr[1]->parent = arr[0];
+        // arr[1]->left = arr[5];
+        // arr[1]->parent = arr[0];
 
-        arr[2]->left = arr[3];
-        arr[2]->right = arr[4];
-        arr[2]->parent = arr[0];
+        // arr[2]->left = arr[3];
+        // arr[2]->right = arr[4];
+        // arr[2]->parent = arr[0];
 
-        arr[3]->parent = arr[2];
-        arr[4]->parent = arr[2];
+        // arr[3]->parent = arr[2];
+        // arr[4]->parent = arr[2];
+
+        arr[20]->left = arr[10];
+        arr[20]->right = arr[22];
+
+        arr[10]->left = arr[5];
+        arr[10]->right = arr[12];
+        arr[10]->parent = arr[20];
+        arr[22]->right = arr[25];
+        arr[22]->left = arr[21];
+        arr[22]->parent = arr[20];
+
+        
 
         root = arr[0];
     }

@@ -111,19 +111,61 @@ public:
         DFS(a->left);
         DFS(a->right);
     }
+
+    // Inorder = f(left) + root + f(right)
+    void Inorder(node *a)
+    {
+        if (a == NULL)
+            return;
+        Inorder(a->left);
+        cout << a->id << " ";
+        Inorder(a->right);
+    }
+
+    // Preorder = root + f(left) + f(right)
+    void Preorder(node *a)
+    {
+        if (a == NULL)
+            return;
+        cout << a->id << " ";
+        Preorder(a->left);
+        Preorder(a->right);
+    }
+
+    // Postorder = f(left) + f(right) + root
+    void Postorder(node *a)
+    {
+        if (a == NULL)
+            return;
+        Postorder(a->left);
+        Postorder(a->right);
+        cout << a->id << " ";
+    }
 };
 int main()
 {
     BinaryTree bt;
-    bt.Insertion(0);
-    bt.Insertion(1);
-    bt.Insertion(2);
+    bt.Insertion(20);
+    bt.Insertion(10);
+    bt.Insertion(22);
     bt.Insertion(5);
+    bt.Insertion(12);
+    bt.Insertion(21);
+    bt.Insertion(25);
     bt.Insertion(3);
-    bt.Insertion(4);
+    bt.Insertion(15);
 
-    bt.BFS();
-   // bt.DFS(bt.root);
+    cout << "Inorder: ";
+    bt.Inorder(bt.root);
+    cout << "\n";
+    cout << "Preorder: ";
+    bt.Preorder(bt.root);
+    cout << "\n";
+    cout << "Postorder: ";
+    bt.Postorder(bt.root);
+
+    // bt.BFS();
+    // bt.DFS(bt.root);
 
     return 0;
 }
