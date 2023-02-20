@@ -47,7 +47,7 @@ public:
             }
             if (r < nodes.size() && nodes[largest] < nodes[r])
             {
-                largest = l;
+                largest = r;
             }
             if (largest == idx)
             {
@@ -60,6 +60,8 @@ public:
     // O(logn)
     void Delete(int idx)
     {
+        if (idx >= nodes.size())
+            return;
         swap(nodes[idx], nodes[nodes.size() - 1]);
         nodes.pop_back();
         down_heapify(idx);
