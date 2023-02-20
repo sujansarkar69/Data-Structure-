@@ -58,7 +58,7 @@ public:
             idx = largest;
         }
     }
-    
+
     // O(logn)
     void Delete(int idx)
     {
@@ -69,7 +69,7 @@ public:
         down_heapify(idx);
     }
 
-    //O(n)
+    // O(n)
     void build_from_array(vector<int> &a)
     {
         nodes = a;
@@ -80,11 +80,80 @@ public:
             down_heapify(i);
         }
     }
+
+    // O(1)
+    int getMax()
+    {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            return -1;
+        }
+        return nodes[0];
+    }
+    // O(logn)
+    int ExtractMax()
+    {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            return -1;
+        }
+        int returnnMax = nodes[0];
+        Delete(0);
+        return returnnMax;
+    }
+
+    int size()
+    {
+        return nodes.size();
+    }
 };
+
+class PriorityQueue
+{
+public:
+    MaxHeap mh;
+    PriorityQueue()
+    {
+    }
+
+    // O(logn)
+    void push(int x)
+    {
+        mh.Insert(x);
+    }
+
+    // O(logn)
+    void pop()
+    {
+        mh.Delete(0);
+    }
+
+    // O(1)
+    int top()
+    {
+        return mh.getMax();
+    }
+
+    int size()
+    {
+        return mh.size();
+    }
+};
+
 int main()
 {
-    MaxHeap mh;
-    vector<int> a = {1, 2, 3, 4, 10, 9, 8, 7};
-    mh.build_from_array(a);
-    mh.printheap();
+    PriorityQueue qp;
+    qp.push(5);
+    qp.push(15);
+    qp.push(50);
+    qp.push(12);
+    qp.push(5);
+
+    while (qp.size() != 0)
+    {
+        cout << qp.top() << " ";
+        qp.pop();
+    }
 }

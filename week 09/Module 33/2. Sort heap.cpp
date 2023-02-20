@@ -58,7 +58,7 @@ public:
             idx = largest;
         }
     }
-    
+
     // O(logn)
     void Delete(int idx)
     {
@@ -69,7 +69,7 @@ public:
         down_heapify(idx);
     }
 
-    //O(n)
+    // O(n)
     void build_from_array(vector<int> &a)
     {
         nodes = a;
@@ -80,11 +80,50 @@ public:
             down_heapify(i);
         }
     }
+
+    // O(1)
+    int getMax()
+    {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            return -1;
+        }
+        return nodes[0];
+    }
+    // O(logn)
+    int ExtractMax()
+    {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            return -1;
+        }
+        int returnnMax = nodes[0];
+        Delete(0);
+        return returnnMax;
+    }
 };
-int main()
+
+vector<int> heap_sort(vector<int> &a)
 {
     MaxHeap mh;
-    vector<int> a = {1, 2, 3, 4, 10, 9, 8, 7};
     mh.build_from_array(a);
-    mh.printheap();
+    vector<int> ans;
+    for (int i = 0; i < a.size(); i++)
+    {
+        ans.push_back(mh.ExtractMax());
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+int main()
+{
+    vector<int> a = {1, 2, 3, 4, 10, 9, 8, 7};
+    vector<int> sorted_a = heap_sort(a);
+    for (int i = 0; i < sorted_a.size(); i++)
+    {
+        cout << sorted_a[i] << " ";
+    }
+    cout << "\n";
 }
