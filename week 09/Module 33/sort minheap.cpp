@@ -1,30 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-class MaxHeap
+class MinHeap
 {
 public:
     vector<int> nodes;
-    MaxHeap()
+    MinHeap()
     {
     }
 
-    // O(logn)
     void up_heapify(int idx)
     {
-        while (idx > 0 && nodes[idx] > nodes[(idx - 1) / 2])
+        while (idx > 0 && nodes[idx] < nodes[(idx - 1) / 2])
         {
             swap(nodes[idx], nodes[(idx - 1) / 2]);
             idx = (idx - 1) / 2;
         }
     }
-    // O(logn)
+
     void Insert(int value)
     {
         nodes.push_back(value);
         up_heapify(nodes.size() - 1);
     }
-    // O(n)
+
     void printheap()
     {
         for (int i = 0; i < nodes.size(); i++)
@@ -34,32 +32,29 @@ public:
         cout << "\n";
     }
 
-    // O(logn)
+    int getMin()
+    {
+        return nodes[0];
+    }
+
     void down_heapify(int idx)
     {
         while (1)
         {
-            int largest = idx;
-            int l = 2 * idx + 1;
-            int r = 2 * idx + 2;
-            if (l < nodes.size() && nodes[largest] < nodes[l])
-            {
-                largest = l;
-            }
-            if (r < nodes.size() && nodes[largest] < nodes[r])
-            {
-                largest = r;
-            }
-            if (largest == idx)
-            {
+            int smallest = idx;
+            int left = 2 * idx + 1;
+            int right = 2 * idx + 2;
+            if (left < nodes.size() && nodes[smallest] > nodes[left])
+                smallest = left;
+            if (right < nodes.size() && nodes[smallest] > nodes[right])
+                smallest = right;
+            if (smallest == idx)
                 break;
-            }
-            swap(nodes[idx], nodes[largest]);
-            idx = largest;
+            swap(nodes[idx], nodes[smallest]);
+            idx = smallest;
         }
     }
 
-    // O(logn)
     void Delete(int idx)
     {
         if (idx >= nodes.size())
@@ -69,30 +64,7 @@ public:
         down_heapify(idx);
     }
 
-    // O(n)
-    void build_from_array(vector<int> &a)
-    {
-        nodes = a;
-        int n = nodes.size();
-        int last_non_leaf = n / 2 - 1;
-        for (int i = last_non_leaf; i >= 0; i--)
-        {
-            down_heapify(i);
-        }
-    }
-
-    // O(1)
-    int getMax()
-    {
-        if (nodes.empty())
-        {
-            cout << "Heap is empty!";
-            return -1;
-        }
-        return nodes[0];
-    }
-    // O(logn)
-    int ExtractMax()
+    int ExtractMin()
     {
         if (nodes.empty())
         {
@@ -103,18 +75,29 @@ public:
         Delete(0);
         return returnnMax;
     }
+
+    void build_with_arry(vector<int> a)
+    {
+        nodes = a;
+        int n = nodes.size();
+        int non_leaf = n / 2 - 1;
+        for (int i = non_leaf; i >= 0; i--)
+        {
+            down_heapify(i);
+        }
+    }
 };
 
 vector<int> heap_sort(vector<int> &a)
 {
-    MaxHeap mh;
-    mh.build_from_array(a);
+    MinHeap mh;
+    mh.nodes = a;
+    // mh.build_with_arry(a);
     vector<int> ans;
     for (int i = 0; i < a.size(); i++)
     {
-        ans.push_back(mh.ExtractMax());
+        ans.push_back(mh.ExtractMin());
     }
-    reverse(ans.begin(), ans.end());
     return ans;
 }
 

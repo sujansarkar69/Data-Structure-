@@ -1,14 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+template <class T>
 class MinHeap
 {
 public:
-    vector<int> nodes;
+    vector<T> nodes;
     MinHeap()
     {
     }
 
-    void up_heapify(int idx)
+    void up_heapify(T idx)
     {
         while (idx > 0 && nodes[idx] < nodes[(idx - 1) / 2])
         {
@@ -17,7 +19,7 @@ public:
         }
     }
 
-    void Insert(int value)
+    void Insert(T value)
     {
         nodes.push_back(value);
         up_heapify(nodes.size() - 1);
@@ -32,8 +34,14 @@ public:
         cout << "\n";
     }
 
-    int getMin()
+    T getMin()
     {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            T a;
+            return a;
+        }
         return nodes[0];
     }
 
@@ -63,34 +71,11 @@ public:
         nodes.pop_back();
         down_heapify(idx);
     }
-
-    int ExtractMin()
-    {
-        if (nodes.empty())
-        {
-            cout << "Heap is empty!";
-            return -1;
-        }
-        int returnnMax = nodes[0];
-        Delete(0);
-        return returnnMax;
-    }
-
-    void build_with_arry(vector<int> a)
-    {
-        nodes = a;
-        int n = nodes.size();
-        int non_leaf = n / 2 - 1;
-        for (int i = non_leaf; i >= 0; i--)
-        {
-            down_heapify(i);
-        }
-    }
 };
 
 int main()
 {
-    MinHeap mh;
+    MinHeap<int> mh;
     mh.Insert(2);
     mh.Insert(4);
     mh.Insert(7);
@@ -102,7 +87,7 @@ int main()
     mh.Insert(6);
     mh.printheap();
     cout << mh.getMin() << "\n";
-    mh.Delete(1);
+    mh.Delete(0);
     mh.printheap();
     cout << mh.getMin() << "\n";
 }
