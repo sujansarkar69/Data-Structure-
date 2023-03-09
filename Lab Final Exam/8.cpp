@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 class MaxHeap
 {
 public:
@@ -9,7 +8,6 @@ public:
     {
     }
 
-    // O(logn)
     void up_heapify(int idx)
     {
         while (idx > 0 && nodes[idx] > nodes[(idx - 1) / 2])
@@ -18,13 +16,13 @@ public:
             idx = (idx - 1) / 2;
         }
     }
-    // O(logn)
+
     void Insert(int value)
     {
         nodes.push_back(value);
         up_heapify(nodes.size() - 1);
     }
-    // O(n)
+
     void printheap()
     {
         for (int i = 0; i < nodes.size(); i++)
@@ -33,7 +31,7 @@ public:
         }
         cout << "\n";
     }
-    // O(logn)
+
     void down_heapify(int idx)
     {
         while (1)
@@ -57,7 +55,7 @@ public:
             idx = largest;
         }
     }
-    // O(logn)
+
     void Delete(int idx)
     {
         if (idx >= nodes.size())
@@ -66,7 +64,7 @@ public:
         nodes.pop_back();
         down_heapify(idx);
     }
-    // O(1)
+
     int getMax()
     {
         if (nodes.empty())
@@ -76,7 +74,7 @@ public:
         }
         return nodes[0];
     }
-    // O(logn)
+
     int ExtractMax()
     {
         if (nodes.empty())
@@ -89,22 +87,43 @@ public:
         return returnnMax;
     }
 };
+
+class MinHeap
+{
+public:
+    MaxHeap mx;
+    void insert(int x)
+    {
+        mx.Insert(-x);
+    }
+    void Delete(int idx)
+    {
+        mx.Delete(idx);
+    }
+    int getMin()
+    {
+        return -mx.getMax();
+    }
+};
+
 int main()
 {
-    MaxHeap mh;
-    mh.Insert(2);
-    mh.Insert(4);
-    mh.Insert(7);
-    mh.Insert(3);
-    mh.Insert(10);
-    mh.Insert(12);
-    mh.Insert(1);
-    mh.Insert(20);
-    mh.Insert(6);
-    mh.printheap();
+    MinHeap mh;
+    mh.insert(2);
+    mh.insert(4);
+    mh.insert(7);
+    mh.insert(3);
+    mh.insert(10);
+    mh.insert(12);
+    mh.insert(1);
+    mh.insert(20);
+    mh.insert(6);
 
-    while (!mh.nodes.empty())
-    {
-        cout << "Max: " << mh.ExtractMax() << "\n";
-    }
+    cout << mh.getMin() << "\n";
+    mh.Delete(0);
+    cout << mh.getMin() << "\n";
+    mh.Delete(0);
+    cout << mh.getMin() << "\n";
+
+    return 0;
 }

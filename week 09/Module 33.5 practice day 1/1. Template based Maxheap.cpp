@@ -77,6 +77,18 @@ public:
         }
         cout << "\n";
     }
+
+    T ExtractMax()
+    {
+        if (nodes.empty())
+        {
+            cout << "Heap is empty!";
+            return -1;
+        }
+        T returnnMax = nodes[0];
+        Delete(0);
+        return returnnMax;
+    }
 };
 int main()
 {
@@ -91,7 +103,10 @@ int main()
     mh.Insert(20);
     mh.Insert(6);
     mh.printheap();
-    mh.Delete(0);
+    
 
-    cout << "Max element: " << mh.getMax() << "\n";
+    while (!mh.nodes.empty())
+    {
+        cout << "Max: " << mh.ExtractMax() << "\n";
+    }
 }
